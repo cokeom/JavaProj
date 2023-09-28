@@ -1,0 +1,3 @@
+[submodule "JavaGame"]
+	path = JavaGame
+	url = https://github.com/cokeom/JavaGame.git
