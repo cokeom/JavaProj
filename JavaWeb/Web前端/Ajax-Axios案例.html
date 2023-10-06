@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajax-Axios案例</title>
+  <script src="./js/axios-0.18.0.js"></script>
+  <script src="./js/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    <table border="1" cellspacing="0" width="60%">
+      <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>图像</th>
+        <th>性别</th>
+        <th>职位</th>
+        <th>入职时间</th>
+        <th>最后操作时间</th>
+      </tr>
+
+      <tr align="center" v-for="(item, index) in emps">
+
+        <td>{{index+1}}</td>
+        <td>{{item.name}}</td>
+        <td> 
+          <img v-bind:src="item.image" width="70px" height="50px"> 
+        </td>
+        <td>
+          <span v-if="item.gender == 1">男</span>
+          <span v-if="item.gender == 2">女</span>
+        </td>
+        <td>{{item.job}}</td>
+        <td>{{item.entrydate}}</td>
+        <td>{{item.updatetime}}</td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
+</body>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      emps:[] // 创建数组接受数据
+    },
+    mounted() {
+      // 发送异步请求，加载数据
+      axios.get("https://mock.apifox.cn/m1/3128855-0-default/emp/list").then(result => {
+        this.emps = result.data.data;
+      });
+    }
+  });
+</script>
+
+</html>
